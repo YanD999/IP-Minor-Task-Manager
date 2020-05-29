@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+        <div th:fragment="header">
+            <img src="/img/banner.png" style="width:100%;" alt="Achtergrond">
+            <nav>
+                <ul>
+                    <li><a href="/tasks" th:classappend="${class == 'current' ? '': 'current'}" th:text="#{Tasks}"></a></li>
+                    <li><a href="/tasks/new" th:class="${class}" th:text="#{NewTask}"></a></li>
+                </ul>
+            </nav>
+        </div>
+    </body>
+</html>

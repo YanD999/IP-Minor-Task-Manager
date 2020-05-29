@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/css/reset.css" th:href="@{/css/reset.css}">
+        <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}">
+        <title th:text="#{Index}"></title>
+    </head>
+
+    <body>
+        <main>
+            <img src="/img/banner.png" style="width:100%;" alt="Achtergrond">
+            <!--https://javadeveloperzone.com/spring-boot/spring-boot-index-page-example/-->
+            <nav>
+                <ul>
+                    <li><a href="/tasks/" th:text="#{Tasks}"></a></li>
+                    <li><a href="/tasks/new" class="current">New Task</a></li>
+
+                </ul>
+            </nav>
+
+            <div class="nav">
+                <ul>
+                    <li><a href="/?lang=nl"><img src="img/favicon-32x32be.png" alt="lang nl"></a></li>
+                    <li><a href="/?lang=en"><img src="img/favicon-32x32uk.png" alt="lang eng"></a></li>
+                    <li><a href="/?lang=fr"><img src="img/favicon-32x32fr.png" alt="lang fr"></a></li>
+                </ul>
+            </div>
+
+            <h2 style="margin: 2rem  47%;">Index</h2>
+        </main>
+        <footer style="margin-top: 28%;">
+            <ul>
+                <li>Delandmeter Yannick 2TI/4SO</li>
+                <li>Copyright 2020</li>
+            </ul>
+        </footer>
+    </body>
+</html>

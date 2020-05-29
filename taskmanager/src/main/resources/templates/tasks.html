@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}">
+    <title>Tasks | Home</title>
+</head>
+
+<body>
+
+    <main>
+        <div th:insert="fragments/nav.html :: header"></div>
+
+        <div class="nav">
+            <ul>
+                <li><a href="/tasks?lang=nl"><img src="img/favicon-32x32be.png" alt="lang nl"></a></li>
+                <li><a href="/tasks?lang=en"><img src="img/favicon-32x32uk.png" alt="lang eng"></a></li>
+                <li><a href="/tasks?lang=fr"><img src="img/favicon-32x32fr.png" alt="lang fr"></a></li>
+            </ul>
+        </div>
+
+        <h1 style="margin: 15% 0 0 47%;" th:text="#{Tasks}"></h1>
+
+
+        <div id="noTask" th:if="${taskList != null && taskList.size() == 0}">
+            <h2 th:text="#{NoTasksLeft}"></h2>
+        </div>
+
+        <div th:if="${taskList != null && taskList.size() != 0}">
+            <table id="tasksTable">
+                <tr id="first">
+                    <th th:text="#{Title}"> </th>
+                    <th th:text="#{DueDate}"> </th>
+                </tr>
+                <tr th:each="task: ${taskList}">
+                    <td>
+                        <a th:href="@{tasks/{id}(id = ${task.id})}" th:text="${task.title}"></a>&#58;&nbsp;<a th:text="${task.dateToString()}"></a>
+                    </td>
+                    <td>
+                        <a th:href="@{tasks/edit/{id}(id = ${task.id})}" th:text="#{Edit}"></a>
+                        <a th:href="@{tasks/delete/{id}(id = ${task.id})}" th:text="#{Delete}"></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </main>
+
+    <div th:insert="fragments/footer.html :: footer"></div>
+</body>
+</html>

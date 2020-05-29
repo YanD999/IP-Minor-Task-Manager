@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/css/reset.css" th:href="@{/css/reset.css}">
+        <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}">
+        <title>Error Page | Task Manager</title>
+    </head>
+    <body>
+        <main>
+            <div>
+                <div>
+                    <h1 style="margin: 10rem 0 0 35%;">Page doesn't exist</h1>
+                </div>
+                <div style="margin-top: 4rem;">
+                    <nav>
+                        <ul>
+                            <li style="background-color: red;"><a style="color:#fff;" href="/tasks">Home</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div style="margin:15rem 0 0 35%;" id="errordiv">
+                    <h2>Path</h2>
+                    <h3 th:text="${path}"></h3>
+
+                    <h2>Error</h2>
+                    <h3 th:text="${error}"></h3>
+
+                    <h2>Status</h2>
+                    <h3 th:text="${status}"></h3>
+
+                    <h2>Message</h2>
+                    <h3 th:text="${message}"></h3>
+
+                    <div th:if="${exception != null}">
+                        <h2>Exception</h2>
+                        <h3 th:text="${exception}"></h3>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

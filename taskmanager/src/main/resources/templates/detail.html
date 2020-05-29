@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}">
+    <title>Tasks | Detail</title>
+</head>
+<body>
+    <main>
+        <div th:insert="fragments/nav.html :: header"></div>
+
+        <div th:if="${task != null}">
+            <nav style="margin-left: 20rem;">
+                <ul>
+                    <li><a th:href="@{${task.id} + '/sub/create'}">New SubTask</a></li>
+                </ul>
+            </nav>
+            <div class="nav">
+                <ul>
+                    <li><a th:href="@{'/tasks/' + ${task.id} + '?lang=nl'}"><img src="img/favicon-32x32be.png" alt="lang nl"></a></li>
+                    <li><a th:href="@{'/tasks/' + ${task.id} + '?lang=fr'}"><img src="img/favicon-32x32uk.png" alt="lang fr"></a></li>
+                    <li><a th:href="@{'/tasks/' + ${task.id} + '?lang=en'}"><img src="img/favicon-32x32fr.png" alt="lang eng"></a></li>
+                </ul>
+            </div>
+        </div>
+        <h1 style="margin: 15% 0 5rem 45%" th:text="#{TaskDetail}"></h1>
+
+        <div th:if="${task == null}">
+            <h2 style="margin: 5% 0 10rem 45%" th:text="#{TaskNotFound}"></h2>
+        </div>
+
+        <div th:if="${task != null}">
+            <table id="detailTable">
+                <tr>
+                    <td class="bold" th:text="#{Title}"> </td>
+                    <td th:text="${task.title}"></td>
+                </tr>
+                <tr>
+                    <td class="bold" th:text="#{Description}"> </td>
+                    <td th:text="${task.description}"></td>
+                </tr>
+                <tr>
+                    <td class="bold" th:text="#{DueDate}"> </td>
+                    <td th:text="${task.dateToString()}"></td>
+                </tr>
+            </table>
+
+            <div th:if="${task.getSubTasksDto() != null && task.getSubTasksDto().size() != 0}">
+                <h1 style="margin: 5rem 0 3rem 45%" th:text="#{Subtasks}"></h1>
+            </div>
+
+            <table id="subTaskTable" th:each ="subtaskDto: ${task.getSubTasksDto()}">
+                <tr>
+                    <td th:text="'Subtask ' + ${subtaskDto.id}" style="margin-left: 45%;"></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;" th:text="#{Title}"> </td>
+                    <td th:text="${subtaskDto.subTitle}"></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;" th:text="#{Description}"> </td>
+                    <td th:text="${subtaskDto.subDescription}"></td>
+                </tr>
+            </table>
+        </div>
+    </main>
+
+    <div th:insert="fragments/footer.html :: footer"></div>
+</body>
+</html>

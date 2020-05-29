@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}">
+    <title>Tasks | Edit</title>
+</head>
+
+<body>
+
+    <main>
+        <div th:insert="fragments/nav.html :: header"></div>
+
+        <div class="nav">
+            <ul>
+                <li><a th:href="@{'/tasks/edit/' + ${task.id} + '?lang=nl'}"><img src="img/favicon-32x32be.png" alt="lang nl"></a></li>
+                <li><a th:href="@{'/tasks/edit/' + ${task.id} + '?lang=fr'}"><img src="img/favicon-32x32uk.png" alt="lang fr"></a></li>
+                <li><a th:href="@{'/tasks/edit/' + ${task.id} + '?lang=en'}"><img src="img/favicon-32x32fr.png" alt="lang eng"></a></li>
+            </ul>
+        </div>
+
+        <h1 style="margin: 13rem 0 5% 45%" th:text="#{EditTask}"></h1>
+
+        <div class="error">
+            <p th:each="error : ${errors}">
+                <a th:text="${error}"></a>
+            </p>
+        </div>
+
+        <form th:action="@{/tasks/edit/{id}(id=${task.id})}" method="post">
+            <fieldset>
+                <div>
+                    <label for="title" th:text="#{Title}"> </label>
+                    <input type="text" name="title" id="title" th:value="${task.title}">
+                </div>
+
+                <div>
+                    <label for="description" th:text="#{Description}"> </label>
+                    <input type="text" name="description" id="description" th:value="${task.description}">
+                </div>
+
+                <div>
+                    <label for="date" th:text="#{DueDate}"> </label>
+                    <input type="datetime-local" name="date" id="date" th:value="${task.date}">
+                </div>
+
+                <input type="submit" th:value="#{Submit}">
+            </fieldset>
+        </form>
+    </main>
+
+    <div th:insert="fragments/footer.html :: footer"></div>
+</body>
+</html>
